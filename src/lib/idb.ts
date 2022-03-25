@@ -1,6 +1,6 @@
 import { DBSchema, openDB } from "idb";
 
-interface DB extends DBSchema {
+export interface DB extends DBSchema {
   videos: {
     value: {
       /** The video the url was originally fetched from */
@@ -49,7 +49,7 @@ export async function getVideo(url: string) {
   return (await idb).get("videos", url);
 }
 
-export async function getAllVideo() {
+export async function getAllVideos() {
   return (await idb).getAll("videos");
 }
 
