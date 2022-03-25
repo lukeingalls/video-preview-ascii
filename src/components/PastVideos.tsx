@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { DB, getAllVideos } from "../lib/idb";
+import { getAllVideos } from "../lib/idb";
+import type { PlayableIdbVideo } from "../types/idb";
+import AsciiVideoPlayer from "./AsciiVideoPlayer";
 
 function PastVideos() {
-  const [videos, setVideos] = useState<
-    Array<DB["videos"]["value"] & { local_url: string }>
-  >([]);
+  const [videos, setVideos] = useState<PlayableIdbVideo[]>([]);
 
   useEffect(() => {
     let mounted = true;
@@ -30,7 +30,21 @@ function PastVideos() {
       <div>Past Videos</div>
       <div>
         {videos.map((video) => {
-          return <video src={video.local_url} controls playsInline muted />;
+          return (
+            <video
+              controls
+              key={video.url}
+              muted
+              playsInline
+              src={video.local_url}
+            />
+          );
+        })}
+      </div>
+
+      <div>
+        {videos.map((video) => {
+          return <AsciiVideoPlayer key={video.url} video={video} />;
         })}
       </div>
     </div>

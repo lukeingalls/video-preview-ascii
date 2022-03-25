@@ -1,29 +1,5 @@
-import { DBSchema, openDB } from "idb";
-
-export interface DB extends DBSchema {
-  videos: {
-    value: {
-      /** The video the url was originally fetched from */
-      url: string;
-
-      /** The video file */
-      video: File;
-
-      /** Doration of the video (seconds) */
-      duration: number;
-
-      /** Width of the video */
-      width: number;
-
-      /** Height of the video */
-      height: number;
-
-      /** When the asset was added to idb */
-      dateTimeAdded: number;
-    };
-    key: string;
-  };
-}
+import { openDB } from "idb";
+import type { DB } from "../types/idb";
 
 let idbError = false;
 const idb = openDB<DB>("ascii-video-preview", 1, {
