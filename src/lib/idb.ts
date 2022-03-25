@@ -5,14 +5,21 @@ interface DB extends DBSchema {
     value: {
       /** The video the url was originally fetched from */
       url: string;
+
       /** The video file */
       video: File;
+
       /** Doration of the video (seconds) */
       duration: number;
+
       /** Width of the video */
       width: number;
+
       /** Height of the video */
       height: number;
+
+      /** When the asset was added to idb */
+      dateTimeAdded: number;
     };
     key: string;
   };
@@ -42,4 +49,17 @@ export async function getVideo(url: string) {
   return (await idb).get("videos", url);
 }
 
+export async function getAllVideo() {
+  return (await idb).getAll("videos");
+}
+
+export async function putVideo(videoData: {
+  duration: number;
+  height: number;
+  width: number;
+  video: File;
+  url: string;
+}) {
+  return (await idb).put("videos", { ...videoData, dateTimeAdded: Date.now() });
+}
 export { idb, idbError };
