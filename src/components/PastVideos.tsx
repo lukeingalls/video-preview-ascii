@@ -28,7 +28,7 @@ function PastVideos() {
   return (
     <div>
       <div>Past Videos</div>
-      <div>
+      {/* <div>
         {videos.map((video) => {
           return (
             <video
@@ -40,7 +40,7 @@ function PastVideos() {
             />
           );
         })}
-      </div>
+      </div> */}
 
       <div>
         {videos.map((video) => {
